@@ -1,0 +1,104 @@
+/* --- Nuevo código para el formulario --- */
+
+.form-container {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.student-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.form-button {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.form-button:hover {
+  transform: translateY(-2px);
+}
+
+/* Estilos de Tema Claro para el formulario */
+.light-theme .form-container {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+}
+
+.light-theme .form-input {
+  background-color: #f9f9f9;
+}
+
+.light-theme .form-button {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Estilos de Tema Oscuro para el formulario */
+.dark-theme .form-container {
+  background-color: #2a2a2a;
+  border: 1px solid #3c3c3c;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .form-title {
+  color: #e0e0e0;
+}
+
+.dark-theme .form-group label {
+  color: #c9c9c9;
+}
+
+.dark-theme .form-input {
+  background-color: #3b3b3b;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+.dark-theme .form-input::placeholder {
+  color: #aaa;
+}
+
+.dark-theme .form-button {
+  background-color: #6a6a6a;
+  color: white;
+}
