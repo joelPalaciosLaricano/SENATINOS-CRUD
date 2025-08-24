@@ -1,0 +1,48 @@
+name: CI/CD Django y React
+
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  django_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' # La versión de Python del proyecto
+
+      - name: Instalar dependencias de Django
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar tests de Django
+        run: python manage.py test
+
+  react_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Usar la versión de Node.js del proyecto
+
+      - name: Instalar dependencias de React
+        run: npm install
+        working-directory: ./frontend # La ruta correcta de la carpeta de React
+
+      - name: Ejecutar tests de React
+        run: npm test
+        working-directory: ./frontend
+        env:
+          CI: true # Esto evita que el test se quede en modo de "observación"
