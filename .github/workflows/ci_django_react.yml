@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - main 
+      - prueba-CI
   pull_request:
     branches:
       - main
-
+      - prueba-CI
 jobs:
   django_tests:
     runs-on: ubuntu-latest
