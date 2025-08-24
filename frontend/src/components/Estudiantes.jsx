@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../api";
-import FormularioEstudiante from "./FormularioEstudiante";
+import ListaEstudiante from "./ListaEstudiantes";
 
 const Estudiantes = () => {
   const [estudiantes, setEstudiantes] = useState([]);
@@ -27,8 +27,7 @@ const Estudiantes = () => {
 
   return (
     <div>
-      <h2>Estudiantes</h2>
-      <FormularioEstudiante
+      <ListaEstudiante
         estudiante={editingEstudiante}
         onSave={handleSave}
       />

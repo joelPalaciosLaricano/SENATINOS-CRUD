@@ -1,0 +1,79 @@
+.form-container {
+  background: #1f2836;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 1000px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #374050;
+}
+
+.form-button {
+  background-color: #2562ea;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.form-button:hover {
+  background-color: #1a56d9;
+}
+
+.cursos-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.cursos-table-header {
+  background: #374050;
+  color: white;
+}
+
+.cursos-table th,
+.cursos-table td {
+  padding: 12px 80px;
+  text-align: left;
+  border-bottom: 1px solid #2d3748;
+}
+
+.cursos-table th {
+  font-weight: 600;
+  color: white;
+}
+
+.cursos-table td {
+  background-color: #1f2836;
+  color: white;
+}
+
+.cursos-table tr:last-child td {
+  border-bottom: none;
+}
+
+.cursos-table td:last-child {
+  display: flex;
+  gap: 10px;
+}
+
+.cursos-table td:last-child .form-button {
+  margin-left: 0;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}

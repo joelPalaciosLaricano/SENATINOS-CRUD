@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../api";
-import FormularioCurso from "./FormularioCurso";
+import ListaCurso from "./ListaCursos";
+
 
 const Cursos = () => {
   const [cursos, setCursos] = useState([]);
@@ -27,8 +28,7 @@ const Cursos = () => {
 
   return (
     <div>
-      <h2>Cursos</h2>
-      <FormularioCurso curso={editingCurso} onSave={handleSave} />
+      <ListaCurso curso={editingCurso} onSave={handleSave} />
       <ul>
         {cursos.map((curso) => (
           <li key={curso.id}>

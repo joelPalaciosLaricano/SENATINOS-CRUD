@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Estudiantes from "./components/Estudiantes";
 import Cursos from "./components/Cursos";
 import "./styles/theme.css";
+import { IoSunnySharp } from "react-icons/io5";
+import { FaRegMoon } from "react-icons/fa";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -11,13 +13,10 @@ function App() {
   };
 
   return (
-    <div className={`App ${theme}-theme`}>
-      <header className="App-header">
-        <h1>Gestión de Estudiantes y Cursos</h1>
-        <button onClick={toggleTheme}>
-          Cambiar a Tema {theme === "light" ? "Oscuro" : "Claro"}
-        </button>
-      </header>
+    <div className="Dashboard">
+      <div className="Titulo">
+      <h1>Gestión Académica</h1>
+      </div>
       <main>
         <div className="container">
           <Estudiantes />
