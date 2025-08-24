@@ -7,6 +7,7 @@ const ListaCurso = ({ curso, onSave }) => {
   const [nota, setNota] = useState("");
   const [estudiantes, setEstudiantes] = useState([]);
   const [estudianteId, setEstudianteId] = useState("");
+  const [mdlOpen, setMdlOpen] = useState(false); // 👈 modal
 
   useEffect(() => {
     fetchEstudiantes();
@@ -41,16 +42,20 @@ const ListaCurso = ({ curso, onSave }) => {
       await API.post("cursos/", data);
     }
     onSave();
+    toggleModal();
   };
+
+  const toggleModal = () => setMdlOpen((v) => !v);
 
   return (
     <div className="form-container">
       <h3 className="form-title">
         Lista de Cursos
-        <button type="submit" className="form-button">
+        <button type="button" className="form-button" onClick={toggleModal}>
           Añadir Curso
         </button>
       </h3>
+
       <table className="cursos-table">
         <thead className="cursos-table-header">
           <tr>
@@ -81,6 +86,64 @@ const ListaCurso = ({ curso, onSave }) => {
           </tr>
         </tbody>
       </table>
+
+      {/* ===== Modal (igual al de estudiante, pero para cursos) ===== */}
+      {mdlOpen && (
+        <div className="mdl-overlay" onClick={toggleModal}>
+          <div className="mdl-content" onClick={(e) => e.stopPropagation()}>
+            <div className="mdl-header">
+              <span className="mdl-title">Añadir Curso</span>
+              <button className="mdl-close" onClick={toggleModal} aria-label="Cerrar">
+                ×
+              </button>
+            </div>
+
+            <form className="mdl-body" onSubmit={handleSubmit}>
+              <label className="mdl-label">Nombre del Curso</label>
+              <input
+                className="mdl-input"
+                type="text"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                required
+              />
+
+              <label className="mdl-label">Nota</label>
+              <input
+                className="mdl-input"
+                type="number"
+                value={nota}
+                onChange={(e) => setNota(e.target.value)}
+                required
+              />
+
+              <label className="mdl-label">Asignar Estudiante</label>
+              <select
+                className="mdl-input"
+                value={estudianteId}
+                onChange={(e) => setEstudianteId(e.target.value)}
+                required
+              >
+                {estudiantes.map((est) => (
+                  <option key={est.id} value={est.id}>
+                    {est.nombre} {est.apellido}
+                  </option>
+                ))}
+              </select>
+
+              <div className="mdl-footer">
+                <button type="button" className="mdl-btn mdl-btn-cancel" onClick={toggleModal}>
+                  Cancelar
+                </button>
+                <button type="submit" className="mdl-btn mdl-btn-save">
+                  Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      {/* ===== fin modal ===== */}
     </div>
   );
 };
