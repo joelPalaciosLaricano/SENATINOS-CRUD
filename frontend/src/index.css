@@ -1,0 +1,148 @@
+/* --- Estilos del formulario --- */
+
+.form-container {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.student-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--text-primary);
+}
+
+.form-input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  transition: var(--transition);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.form-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.form-button {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+  background-color: var(--button-bg);
+  color: white;
+}
+
+.form-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  opacity: 0.9;
+  background-color: var(--button-hover);
+}
+
+/* Estilos para tablas y listas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--table-border);
+}
+
+th {
+  background-color: var(--bg-table-header);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+td {
+  color: var(--text-primary);
+  background-color: var(--bg-table-row);
+}
+
+tr:hover td {
+  background-color: var(--bg-table-row-hover);
+}
+
+/* Botones de acción */
+.action-button {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+  background: transparent;
+}
+
+.edit-button {
+  background-color: transparent;
+  color: var(--accent-color);
+}
+
+.edit-button:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.delete-button {
+  background-color: transparent;
+  color: #dc3545;
+}
+
+.delete-button:hover {
+  background-color: var(--bg-tertiary);
+}
+
+/* Estilos para las etiquetas de cursos */
+.course-tag {
+  background: var(--accent-color);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin: 2px;
+  display: inline-block;
+}
