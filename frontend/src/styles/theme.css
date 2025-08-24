@@ -1,0 +1,140 @@
+/* Variables CSS para temas */
+:root {
+  --transition: all 0.3s ease;
+}
+
+/* Tema claro (por defecto) */
+body.light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --bg-header: #ffffff;
+  --bg-table-header: #f8f9fa;
+  --bg-table-row: #ffffff;
+  --bg-table-row-hover: #f8f9fa;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-header: #007bff;
+  --accent-color: #007bff;
+  --accent-hover: #0056b3;
+  --border-color: #dee2e6;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --table-border: #dee2e6;
+  --button-bg: #007bff;
+  --button-hover: #0056b3;
+  --tab-active: #007bff;
+  --tab-inactive: #6c757d;
+}
+
+/* Tema oscuro */
+body.dark {
+  --bg-primary: #101826;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #404040;
+  --bg-header: #1f2836;
+  --bg-table-header: #374050;
+  --bg-table-row: #1f2836;
+  --bg-table-row-hover: #404040;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-header: #61a3f5;
+  --accent-color: #61a3f5;
+  --accent-hover: #4a8fd8;
+  --border-color: #555555;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --table-border: #555555;
+  --button-bg: #61a3f5;
+  --button-hover: #4a8fd8;
+  --tab-active: #61a3f5;
+  --tab-inactive: #b0b0b0;
+}
+
+/* Estilos generales */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+/* Estilos de la aplicación */
+.App {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  transition: var(--transition);
+}
+
+/* Header */
+.App-header {
+  background-color: var(--bg-header);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.App-header h1 {
+  margin: 0;
+  color: var(--text-header);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Botón de cambio de tema */
+.theme {
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-primary);
+  font-size: 1.2rem;
+}
+
+.theme:hover {
+  background: var(--accent-color);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: var(--shadow);
+}
+
+/* Dashboard */
+.Dashboard {
+  padding: 2rem;
+}
+
+.Titulo h1 {
+  padding: 2rem 3rem;
+  text-align: left;
+  margin: 0 0 2rem 0;
+  background: var(--bg-secondary);
+  color: var(--accent-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+/* Contenedores */
+.container {
+  background: transparent;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: transparent;
+  border: transparent;
+}
+
+/* Transiciones suaves para todos los elementos */
+* {
+  transition: var(--transition);
+}
+
