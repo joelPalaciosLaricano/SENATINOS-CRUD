@@ -7,51 +7,36 @@ import "../styles/ListaCursos.css"; // Tus estilos CSS existentes
 const ListaCurso = ({ cursoToEdit, onSave, mdlOpen, toggleModal }) => {
   const [nombre, setNombre] = useState("");
   const [nota, setNota] = useState("");
-  const [estudiantes, setEstudiantes] = useState([]); // Para el selector de estudiante
-  const [estudianteId, setEstudianteId] = useState("");
 
-  useEffect(() => {
-    fetchEstudiantes(); // Carga los estudiantes al inicio para el selector
-  }, []);
-
-  // Cuando cambia el cursoToEdit (para edición) o la lista de estudiantes
+  // Cuando cambia el cursoToEdit (para edición)
   useEffect(() => {
     if (cursoToEdit) {
       // Si hay un curso para editar, carga sus datos
       setNombre(cursoToEdit.nombre);
       setNota(cursoToEdit.nota);
-      setEstudianteId(cursoToEdit.estudiante);
     } else {
       // Si no hay curso para editar (añadir nuevo), limpia el formulario
       setNombre("");
       setNota("");
-      // Si hay estudiantes, selecciona el primero por defecto
-      if (estudiantes.length > 0) {
-        setEstudianteId(estudiantes[0].id);
-      } else {
-        setEstudianteId(""); // O deja vacío si no hay estudiantes
-      }
     }
-  }, [cursoToEdit, estudiantes]);
-
-  // Obtener la lista de estudiantes para el selector
-  const fetchEstudiantes = async () => {
-    try {
-      const res = await API.get("estudiantes/");
-      setEstudiantes(res.data);
-      // Si no hay un estudiante seleccionado y hay estudiantes, selecciona el primero
-      if (!estudianteId && res.data.length > 0) {
-        setEstudianteId(res.data[0].id);
-      }
-    } catch (error) {
-      console.error("Error al obtener estudiantes para el selector:", error);
-    }
-  };
+  }, [cursoToEdit]);
 
   // Maneja el envío del formulario (crear o actualizar curso)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = { nombre, nota, estudiante: estudianteId };
+    
+    // Validación de campos
+    if (!nombre.trim()) {
+      alert("El nombre del curso es obligatorio");
+      return;
+    }
+    
+    if (!nota || nota === "") {
+      alert("La nota es obligatoria");
+      return;
+    }
+    
+    const data = { nombre: nombre.trim(), nota };
 
     try {
       if (cursoToEdit) {
@@ -64,6 +49,7 @@ const ListaCurso = ({ cursoToEdit, onSave, mdlOpen, toggleModal }) => {
       onSave(); // Llama a la función onSave del padre para recargar la lista y cerrar el modal
     } catch (error) {
       console.error("Error al guardar curso:", error);
+      alert("Error al guardar el curso. Verifique los datos e intente nuevamente.");
     }
   };
 
@@ -98,24 +84,6 @@ const ListaCurso = ({ cursoToEdit, onSave, mdlOpen, toggleModal }) => {
                 onChange={(e) => setNota(e.target.value)}
                 required
               />
-
-              <label className="mdl-label">Estudiante</label>
-              <select
-                className="mdl-input"
-                value={estudianteId}
-                onChange={(e) => setEstudianteId(e.target.value)}
-                required
-              >
-                {estudiantes.length > 0 ? (
-                  estudiantes.map((est) => (
-                    <option key={est.id} value={est.id}>
-                      {est.nombre} {est.apellido}
-                    </option>
-                  ))
-                ) : (
-                  <option value="">Cargando estudiantes...</option>
-                )}
-              </select>
 
               <div className="mdl-footer">
                 <button type="button" className="mdl-btn mdl-btn-cancel" onClick={toggleModal}>

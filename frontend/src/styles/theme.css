@@ -57,6 +57,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: var(--transition);
+  min-height: 100vh;
 }
 
 /* Estilos de la aplicación */
@@ -64,6 +65,8 @@ body {
   min-height: 100vh;
   background-color: var(--bg-primary);
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header */
@@ -110,6 +113,9 @@ body {
 /* Dashboard */
 .Dashboard {
   padding: 2rem;
+  flex: 1;
+  background-color: var(--bg-primary);
+  min-height: calc(100vh - 80px);
 }
 
 .Titulo h1 {
@@ -131,6 +137,8 @@ body {
   margin-bottom: 2rem;
   box-shadow: transparent;
   border: transparent;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Transiciones suaves para todos los elementos */

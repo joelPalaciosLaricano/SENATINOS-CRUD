@@ -1,18 +1,17 @@
 // src/components/Estudiantes.jsx
 import React, { useState, useEffect } from "react";
-import API from "../api"; // Asegúrate de que api.js esté creado y configurado
-import ListaEstudiantes from "./ListaEstudiantes"; // Importa el componente para añadir/editar estudiantes
+import API from "../api";
+import ListaEstudiantes from "./ListaEstudiantes";
 
 const Estudiantes = () => {
   const [estudiantes, setEstudiantes] = useState([]);
-  const [editingEstudiante, setEditingEstudiante] = useState(null); // Almacena el estudiante a editar
-  const [mdlOpen, setMdlOpen] = useState(false); // Estado para controlar la visibilidad del modal
+  const [editingEstudiante, setEditingEstudiante] = useState(null);
+  const [mdlOpen, setMdlOpen] = useState(false);
 
   useEffect(() => {
     fetchEstudiantes();
   }, []);
 
-  // Función para obtener todos los estudiantes del backend
   const fetchEstudiantes = async () => {
     try {
       const res = await API.get("estudiantes/");
@@ -22,32 +21,28 @@ const Estudiantes = () => {
     }
   };
 
-  // Función para eliminar un estudiante
   const handleDelete = async (id) => {
     try {
       await API.delete(`estudiantes/${id}/`);
-      fetchEstudiantes(); // Recarga la lista después de eliminar
+      fetchEstudiantes();
     } catch (error) {
       console.error("Error al eliminar estudiante:", error);
     }
   };
 
-  // Función que se llama cuando se guarda un estudiante (nuevo o editado)
   const handleSave = () => {
-    setEditingEstudiante(null); // Limpia el estudiante en edición
-    setMdlOpen(false); // Cierra el modal
-    fetchEstudiantes(); // Recarga la lista
+    setEditingEstudiante(null);
+    setMdlOpen(false);
+    fetchEstudiantes();
   };
 
-  // Abre el modal para añadir un nuevo estudiante
   const handleAddClick = () => {
-    setEditingEstudiante(null); // Asegura que no haya un estudiante en edición
+    setEditingEstudiante(null);
     setMdlOpen(true);
   };
 
-  // Abre el modal para editar un estudiante existente
   const handleEditClick = (estudiante) => {
-    setEditingEstudiante(estudiante); // Establece el estudiante a editar
+    setEditingEstudiante(estudiante);
     setMdlOpen(true);
   };
 
@@ -66,7 +61,7 @@ const Estudiantes = () => {
             <th>ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
-            <th>Cursos</th> {/* Columna para mostrar cursos */}
+            <th>Cursos</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -106,12 +101,11 @@ const Estudiantes = () => {
         </tbody>
       </table>
 
-      {/* El modal de ListaEstudiantes se renderiza aquí y controla su propia visibilidad */}
       <ListaEstudiantes
         estudianteToEdit={editingEstudiante}
         onSave={handleSave}
-        mdlOpen={mdlOpen} // Pasa el estado de apertura del modal
-        toggleModal={() => setMdlOpen(false)} // Función para cerrar el modal desde dentro
+        mdlOpen={mdlOpen}
+        toggleModal={() => setMdlOpen(false)}
       />
     </div>
   );

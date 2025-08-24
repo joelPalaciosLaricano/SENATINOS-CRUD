@@ -1,11 +1,12 @@
 .form-container {
-  background: var(--bg-secondary);
+  background: transparent;
   border-radius: 10px;
   padding: 20px;
   margin: 20px auto;
-  max-width: 100%;
+  max-width: 1000px;
   box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
+  min-height: 15vh;
 }
 
 .form-title {
@@ -30,6 +31,7 @@
   transition: var(--transition);
 }
 
+
 .form-button:hover {
   background-color: var(--button-hover);
 }
@@ -45,6 +47,7 @@
   margin-top: 20px;
   background: var(--bg-secondary);
   box-shadow: var(--shadow);
+  table-layout: fixed;
 }
 
 .estudiantes-table-header {
@@ -57,11 +60,11 @@
 
 .estudiantes-table th,
 .estudiantes-table td {
-  padding: 12px 24px;
+  padding: 12px 10px;
   text-align: left;
   word-wrap: break-word;
   align-items: center;
-  min-width: 150px;
+  min-width: 140px;
   justify-content: space-between;
   border-bottom: 1px solid var(--table-border);
 }
@@ -85,15 +88,13 @@
   border-bottom: none;
 }
 
-.estudiantes-table td:last-child {
-  display: flex;
-  gap: 10px;
-}
+
 
 .estudiantes-table td:last-child .form-button {
   margin-left: 0;
   padding: 5px 10px;
   font-size: 0.8rem;
+  white-space: nowrap
 }
 
 /* Estilos para las etiquetas de cursos */
@@ -132,7 +133,7 @@
 /* ===== Modal oscuro estilo la imagen ===== */
 .mdl-overlay{
   position:fixed; inset:0; z-index:2000;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.5);
   display:flex; align-items:center; justify-content:center;
 }
 

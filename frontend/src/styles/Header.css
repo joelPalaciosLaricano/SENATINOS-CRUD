@@ -6,6 +6,11 @@
   padding: 10px 20px;
   border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .app-header h1 {

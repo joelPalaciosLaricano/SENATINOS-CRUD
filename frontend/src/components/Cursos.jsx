@@ -66,7 +66,6 @@ const Cursos = () => {
             <th>ID</th>
             <th>Nombre</th>
             <th>Nota</th>
-            {/* Se elimina la columna 'Estudiante ID' según la solicitud */}
             <th>Acciones</th>
           </tr>
         </thead>

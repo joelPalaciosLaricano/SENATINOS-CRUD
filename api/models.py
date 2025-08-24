@@ -9,8 +9,8 @@ class Estudiante(models.Model):
 
 class Curso(models.Model):
     nombre = models.CharField(max_length=100)
-    nota = models.DecimalField(max_digits=4, decimal_places=2)
-    estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE, related_name='cursos')
+    nota = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    estudiantes = models.ManyToManyField(Estudiante, related_name='cursos', blank=True)
 
     def __str__(self):
-        return f"{self.nombre} - {self.estudiante}"
+        return f"{self.nombre}"
