@@ -1,36 +1,37 @@
 .form-container {
-  background: #1f2836;
+  background: transparent;
   border-radius: 10px;
   padding: 20px;
   margin: 20px auto;
   max-width: 1000px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
 }
 
 .form-title {
   font-size: 1.5rem;
-  color: rgb(255, 255, 255);
+  color: var(--text-primary);
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 10px;
-  border-bottom: 1px solid #374050;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .form-button {
-  background-color: #2562ea;
+  background-color: var(--button-bg);
   color: white;
   border: none;
   border-radius: 5px;
   padding: 8px 16px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.3s;
+  transition: var(--transition);
 }
 
 .form-button:hover {
-  background-color: #1a56d9;
+  background-color: var(--button-hover);
 }
 
 .cursos-table {
@@ -38,29 +39,43 @@
   border-collapse: collapse;
   border-radius: 8px;
   overflow: hidden;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   margin-top: 20px;
+  background: transparent;
+  box-shadow: var(--shadow);
 }
 
 .cursos-table-header {
-  background: #374050;
-  color: white;
+  background: var(--bg-table-header);
+  color: var(--text-primary);
 }
 
 .cursos-table th,
 .cursos-table td {
-  padding: 12px 80px;
+  padding: 12px 24px;
   text-align: left;
-  border-bottom: 1px solid #2d3748;
+  word-wrap: break-word;
+  align-items: center;
+  min-width: 150px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--table-border);
 }
 
 .cursos-table th {
   font-weight: 600;
-  color: white;
+  color: var(--text-primary);
+  background: var(--bg-table-header);
 }
 
 .cursos-table td {
-  background-color: #1f2836;
-  color: white;
+  background-color: var(--bg-table-row);
+  color: var(--text-primary);
+}
+
+.cursos-table tr:hover td {
+  background-color: var(--bg-table-row-hover);
 }
 
 .cursos-table tr:last-child td {
@@ -76,4 +91,26 @@
   margin-left: 0;
   padding: 5px 10px;
   font-size: 0.8rem;
+}
+
+/* Botones de acción */
+.action-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.action-button:hover {
+  background: var(--bg-tertiary);
+}
+
+.edit-button {
+  color: var(--accent-color);
+}
+
+.delete-button {
+  color: #dc3545;
 }

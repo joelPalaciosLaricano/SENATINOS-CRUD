@@ -1,16 +1,19 @@
-/* --- Nuevo código para el formulario --- */
+/* --- Estilos del formulario --- */
 
 .form-container {
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow);
   margin-bottom: 20px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
 }
 
 .form-title {
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.5rem;
+  color: var(--text-primary);
 }
 
 .student-form {
@@ -28,20 +31,27 @@
   font-size: 0.9rem;
   font-weight: bold;
   margin-bottom: 5px;
+  color: var(--text-primary);
 }
 
 .form-input {
   padding: 10px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: var(--transition);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .form-input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: var(--accent-color);
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.form-input::placeholder {
+  color: var(--text-secondary);
 }
 
 .form-button {
@@ -51,54 +61,88 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: var(--transition);
+  background-color: var(--button-bg);
+  color: white;
 }
 
 .form-button:hover {
   transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  opacity: 0.9;
+  background-color: var(--button-hover);
 }
 
-/* Estilos de Tema Claro para el formulario */
-.light-theme .form-container {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
+/* Estilos para tablas y listas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
 }
 
-.light-theme .form-input {
-  background-color: #f9f9f9;
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--table-border);
 }
 
-.light-theme .form-button {
-  background-color: #007bff;
+th {
+  background-color: var(--bg-table-header);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+td {
+  color: var(--text-primary);
+  background-color: var(--bg-table-row);
+}
+
+tr:hover td {
+  background-color: var(--bg-table-row-hover);
+}
+
+/* Botones de acción */
+.action-button {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+  background: transparent;
+}
+
+.edit-button {
+  background-color: transparent;
+  color: var(--accent-color);
+}
+
+.edit-button:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.delete-button {
+  background-color: transparent;
+  color: #dc3545;
+}
+
+.delete-button:hover {
+  background-color: var(--bg-tertiary);
+}
+
+/* Estilos para las etiquetas de cursos */
+.course-tag {
+  background: var(--accent-color);
   color: white;
-}
-
-/* Estilos de Tema Oscuro para el formulario */
-.dark-theme .form-container {
-  background-color: #2a2a2a;
-  border: 1px solid #3c3c3c;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.dark-theme .form-title {
-  color: #e0e0e0;
-}
-
-.dark-theme .form-group label {
-  color: #c9c9c9;
-}
-
-.dark-theme .form-input {
-  background-color: #3b3b3b;
-  color: #f0f0f0;
-  border-color: #555;
-}
-
-.dark-theme .form-input::placeholder {
-  color: #aaa;
-}
-
-.dark-theme .form-button {
-  background-color: #6a6a6a;
-  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin: 2px;
+  display: inline-block;
 }

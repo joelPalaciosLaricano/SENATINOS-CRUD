@@ -117,20 +117,6 @@ const ListaCurso = ({ curso, onSave }) => {
                 required
               />
 
-              <label className="mdl-label">Asignar Estudiante</label>
-              <select
-                className="mdl-input"
-                value={estudianteId}
-                onChange={(e) => setEstudianteId(e.target.value)}
-                required
-              >
-                {estudiantes.map((est) => (
-                  <option key={est.id} value={est.id}>
-                    {est.nombre} {est.apellido}
-                  </option>
-                ))}
-              </select>
-
               <div className="mdl-footer">
                 <button type="button" className="mdl-btn mdl-btn-cancel" onClick={toggleModal}>
                   Cancelar

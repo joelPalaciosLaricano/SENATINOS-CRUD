@@ -50,6 +50,10 @@ const ListaEstudiantes = ({ estudiantes, onEdit, onDelete }) => {
             <td>2</td>
             <td>María</td>
             <td>López</td>
+            <td>
+              <button className="form-button">Editar</button>
+              <button className="form-button">Eliminar</button>
+            </td>
           </tr>
           <tr>
             <td>1</td>

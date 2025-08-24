@@ -1,25 +1,37 @@
 .app-header {
-background: rgb(55, 55, 61);
+  background: var(--bg-header);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
 }
 
 .app-header h1 {
   font-size: 1.5rem;
-  color: var(--text-light);
+  color: var(--text-header);
+  margin: 0;
 }
 
 .app-header button {
-  background: none;
-  border: none;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-primary);
   font-size: 1.25rem;
-  color: var(--blue);
 }
 
 .app-header button:hover {
-  color: var(--blue-dark);
+  background: var(--accent-color);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: var(--shadow);
 }
