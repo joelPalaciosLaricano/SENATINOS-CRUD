@@ -1,78 +1,52 @@
+// src/components/ListaEstudiantes.jsx
 import React, { useState, useEffect } from "react";
-import API from "../api";
-import "../styles/ListaEstudiantes.css";
+import API from "../api"; // Asegúrate de que api.js esté creado y configurado
+import "../styles/ListaEstudiantes.css"; // Tus estilos CSS existentes
 
-const ListaEstudiantes = ({ estudiantes, onEdit, onDelete }) => {
-  // --- solo para el modal ---
-  const [mdlOpen, setMdlOpen] = useState(false);
+// Este componente ahora es exclusivamente para el formulario dentro del modal
+const ListaEstudiantes = ({ estudianteToEdit, onSave, mdlOpen, toggleModal }) => {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
-  const [cursos, setCursos] = useState({
-    matematicas: false,
-    historia: false,
-    programacion: false,
-  });
 
-  const toggleModal = () => setMdlOpen((v) => !v);
-  const handleCheck = (e) => {
-    const { name, checked } = e.target;
-    setCursos((p) => ({ ...p, [name]: checked }));
+  // Cuando cambia el estudianteToEdit (para edición)
+  useEffect(() => {
+    if (estudianteToEdit) {
+      // Si hay un estudiante para editar, carga sus datos
+      setNombre(estudianteToEdit.nombre);
+      setApellido(estudianteToEdit.apellido);
+    } else {
+      // Si no hay estudiante para editar (añadir nuevo), limpia el formulario
+      setNombre("");
+      setApellido("");
+    }
+  }, [estudianteToEdit]);
+
+  // Maneja el envío del formulario (crear o actualizar estudiante)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = { nombre, apellido };
+
+    try {
+      if (estudianteToEdit) {
+        // Actualizar estudiante existente
+        await API.put(`estudiantes/${estudianteToEdit.id}/`, data);
+      } else {
+        // Crear nuevo estudiante
+        await API.post("estudiantes/", data);
+      }
+      onSave(); // Llama a la función onSave del padre para recargar la lista y cerrar el modal
+    } catch (error) {
+      console.error("Error al guardar estudiante:", error);
+    }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault(); // por ahora solo visual
-  };
-  // --- fin modal ---
 
   return (
-    <div className="form-container">
-      <h3 className="form-title">
-        Lista de Estudiantes
-        <button
-          type="submit"
-          className="form-button"
-          onClick={toggleModal}
-        >
-          Añadir Estudiante
-        </button>
-      </h3>
-
-      <table className="estudiantes-table">
-        <thead className="estudiantes-table-header">
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>2</td>
-            <td>María</td>
-            <td>López</td>
-            <td>
-              <button className="form-button">Editar</button>
-              <button className="form-button">Eliminar</button>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Juan</td>
-            <td>Pérez</td>
-            <td>
-              <button className="form-button">Editar</button>
-              <button className="form-button">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      {/* ===== Modal (solo añadido) ===== */}
-      {mdlOpen && (
+    <>
+      {mdlOpen && ( // Solo renderiza el modal si mdlOpen es true
         <div className="mdl-overlay" onClick={toggleModal}>
           <div className="mdl-content" onClick={(e) => e.stopPropagation()}>
             <div className="mdl-header">
-              <span className="mdl-title">Añadir Estudiante</span>
+              <span className="mdl-title">{estudianteToEdit ? "Editar" : "Añadir"} Estudiante</span>
               <button className="mdl-close" onClick={toggleModal} aria-label="Cerrar">
                 ×
               </button>
@@ -97,36 +71,12 @@ const ListaEstudiantes = ({ estudiantes, onEdit, onDelete }) => {
                 required
               />
 
-              <label className="mdl-label">Cursos Asignados</label>
+              {/* La asignación de cursos se gestiona en el formulario de cursos,
+                  no directamente al crear/editar un estudiante en este modelo. */}
+              {/* <label className="mdl-label">Cursos Asignados</label>
               <div className="mdl-cursos">
-                <label className="mdl-checkbox">
-                  <input
-                    type="checkbox"
-                    name="matematicas"
-                    checked={cursos.matematicas}
-                    onChange={handleCheck}
-                  />
-                  <span>Matemáticas</span>
-                </label>
-                <label className="mdl-checkbox">
-                  <input
-                    type="checkbox"
-                    name="historia"
-                    checked={cursos.historia}
-                    onChange={handleCheck}
-                  />
-                  <span>Historia</span>
-                </label>
-                <label className="mdl-checkbox">
-                  <input
-                    type="checkbox"
-                    name="programacion"
-                    checked={cursos.programacion}
-                    onChange={handleCheck}
-                  />
-                  <span>Programación</span>
-                </label>
-              </div>
+                ... (Aquí iría la lógica si se implementara la asignación directa)
+              </div> */}
 
               <div className="mdl-footer">
                 <button type="button" className="mdl-btn mdl-btn-cancel" onClick={toggleModal}>
@@ -140,8 +90,7 @@ const ListaEstudiantes = ({ estudiantes, onEdit, onDelete }) => {
           </div>
         </div>
       )}
-      {/* ===== fin modal ===== */}
-    </div>
+    </>
   );
 };
 

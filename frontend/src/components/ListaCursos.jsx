@@ -1,98 +1,79 @@
+// src/components/ListaCursos.jsx
 import React, { useState, useEffect } from "react";
-import API from "../api";
-import "../styles/ListaCursos.css";
+import API from "../api"; // Asegúrate de que api.js esté creado y configurado
+import "../styles/ListaCursos.css"; // Tus estilos CSS existentes
 
-const ListaCurso = ({ curso, onSave }) => {
+// Este componente ahora es exclusivamente para el formulario dentro del modal
+const ListaCurso = ({ cursoToEdit, onSave, mdlOpen, toggleModal }) => {
   const [nombre, setNombre] = useState("");
   const [nota, setNota] = useState("");
-  const [estudiantes, setEstudiantes] = useState([]);
+  const [estudiantes, setEstudiantes] = useState([]); // Para el selector de estudiante
   const [estudianteId, setEstudianteId] = useState("");
-  const [mdlOpen, setMdlOpen] = useState(false); // 👈 modal
 
   useEffect(() => {
-    fetchEstudiantes();
+    fetchEstudiantes(); // Carga los estudiantes al inicio para el selector
   }, []);
 
+  // Cuando cambia el cursoToEdit (para edición) o la lista de estudiantes
   useEffect(() => {
-    if (curso) {
-      setNombre(curso.nombre);
-      setNota(curso.nota);
-      setEstudianteId(curso.estudiante);
+    if (cursoToEdit) {
+      // Si hay un curso para editar, carga sus datos
+      setNombre(cursoToEdit.nombre);
+      setNota(cursoToEdit.nota);
+      setEstudianteId(cursoToEdit.estudiante);
     } else {
+      // Si no hay curso para editar (añadir nuevo), limpia el formulario
       setNombre("");
       setNota("");
+      // Si hay estudiantes, selecciona el primero por defecto
       if (estudiantes.length > 0) {
         setEstudianteId(estudiantes[0].id);
+      } else {
+        setEstudianteId(""); // O deja vacío si no hay estudiantes
       }
     }
-  }, [curso, estudiantes]);
+  }, [cursoToEdit, estudiantes]);
 
+  // Obtener la lista de estudiantes para el selector
   const fetchEstudiantes = async () => {
-    const res = await API.get("estudiantes/");
-    setEstudiantes(res.data);
+    try {
+      const res = await API.get("estudiantes/");
+      setEstudiantes(res.data);
+      // Si no hay un estudiante seleccionado y hay estudiantes, selecciona el primero
+      if (!estudianteId && res.data.length > 0) {
+        setEstudianteId(res.data[0].id);
+      }
+    } catch (error) {
+      console.error("Error al obtener estudiantes para el selector:", error);
+    }
   };
 
+  // Maneja el envío del formulario (crear o actualizar curso)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { nombre, nota, estudiante: estudianteId };
 
-    if (curso) {
-      await API.put(`cursos/${curso.id}/`, data);
-    } else {
-      await API.post("cursos/", data);
+    try {
+      if (cursoToEdit) {
+        // Actualizar curso existente
+        await API.put(`cursos/${cursoToEdit.id}/`, data);
+      } else {
+        // Crear nuevo curso
+        await API.post("cursos/", data);
+      }
+      onSave(); // Llama a la función onSave del padre para recargar la lista y cerrar el modal
+    } catch (error) {
+      console.error("Error al guardar curso:", error);
     }
-    onSave();
-    toggleModal();
   };
 
-  const toggleModal = () => setMdlOpen((v) => !v);
-
   return (
-    <div className="form-container">
-      <h3 className="form-title">
-        Lista de Cursos
-        <button type="button" className="form-button" onClick={toggleModal}>
-          Añadir Curso
-        </button>
-      </h3>
-
-      <table className="cursos-table">
-        <thead className="cursos-table-header">
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Nota</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>2</td>
-            <td>Historia</td>
-            <td>88</td>
-            <td>
-              <button className="form-button">Editar</button>
-              <button className="form-button">Eliminar</button>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Matemáticas</td>
-            <td>95</td>
-            <td>
-              <button className="form-button">Editar</button>
-              <button className="form-button">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      {/* ===== Modal (igual al de estudiante, pero para cursos) ===== */}
-      {mdlOpen && (
+    <>
+      {mdlOpen && ( // Solo renderiza el modal si mdlOpen es true
         <div className="mdl-overlay" onClick={toggleModal}>
           <div className="mdl-content" onClick={(e) => e.stopPropagation()}>
             <div className="mdl-header">
-              <span className="mdl-title">Añadir Curso</span>
+              <span className="mdl-title">{cursoToEdit ? "Editar" : "Añadir"} Curso</span>
               <button className="mdl-close" onClick={toggleModal} aria-label="Cerrar">
                 ×
               </button>
@@ -112,10 +93,29 @@ const ListaCurso = ({ curso, onSave }) => {
               <input
                 className="mdl-input"
                 type="number"
+                step="0.01" // Permite números decimales
                 value={nota}
                 onChange={(e) => setNota(e.target.value)}
                 required
               />
+
+              <label className="mdl-label">Estudiante</label>
+              <select
+                className="mdl-input"
+                value={estudianteId}
+                onChange={(e) => setEstudianteId(e.target.value)}
+                required
+              >
+                {estudiantes.length > 0 ? (
+                  estudiantes.map((est) => (
+                    <option key={est.id} value={est.id}>
+                      {est.nombre} {est.apellido}
+                    </option>
+                  ))
+                ) : (
+                  <option value="">Cargando estudiantes...</option>
+                )}
+              </select>
 
               <div className="mdl-footer">
                 <button type="button" className="mdl-btn mdl-btn-cancel" onClick={toggleModal}>
@@ -129,8 +129,7 @@ const ListaCurso = ({ curso, onSave }) => {
           </div>
         </div>
       )}
-      {/* ===== fin modal ===== */}
-    </div>
+    </>
   );
 };
 
