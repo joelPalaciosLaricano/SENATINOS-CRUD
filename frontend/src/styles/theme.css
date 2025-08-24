@@ -29,11 +29,11 @@ body.light {
 /* Tema oscuro */
 body.dark {
   --bg-primary: #101826;
-  --bg-secondary: #2d2d2d;
-  --bg-tertiary: #404040;
+  --bg-secondary: #1f2836;
+  --bg-tertiary: #1f2836;
   --bg-header: #1f2836;
   --bg-table-header: #374050;
-  --bg-table-row: #1f2836;
+  --bg-table-row: #2d2d2d;
   --bg-table-row-hover: #404040;
   --text-primary: #ffffff;
   --text-secondary: #b0b0b0;
