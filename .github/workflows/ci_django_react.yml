@@ -19,13 +19,15 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10' # La versión de Python del proyecto
+          python-version: '3.10'
 
       - name: Instalar dependencias de Django
         run: pip install -r requirements.txt
+        working-directory: ./crud_backend 
 
       - name: Ejecutar tests de Django
         run: python manage.py test
+        working-directory: ./crud_backend 
 
   react_tests:
     runs-on: ubuntu-latest
