@@ -3,14 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
- "scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "lint": "eslint .",
-  "test": "vitest run",
-  "preview": "vite preview"
-}
-
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "axios": "^1.11.0",
     "react": "^19.1.1",
