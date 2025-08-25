@@ -200,13 +200,11 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 ## 👤 Autores
 
-
 - GitHub: [@joelPalaciosLaricano](https://github.com/joelPalaciosLaricano)
-- GitHub  [@goldz9999](:https://github.com/goldz9999)
-- GitHub  [@evp2005](:https://github.com/evp2005)
-- GitHub  [@MiguelQuijano1](:https://github.com/MiguelQuijano1)
-- GitHub  [@Jaime-D-Z](:https://github.com/Jaime-D-Z)
-
+- GitHub: [@goldz9999](https://github.com/goldz9999)
+- GitHub: [@evp2005](https://github.com/evp2005)
+- GitHub: [@MiguelQuijano1](https://github.com/MiguelQuijano1)
+- GitHub: [@Jaime-D-Z](https://github.com/Jaime-D-Z)
 
 ## 🙏 Agradecimientos
 
